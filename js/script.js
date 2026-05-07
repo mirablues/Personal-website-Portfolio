@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const STORAGE_KEY = 'mira_lang';
 
     if (langToggleBtn) {
-        let currentLang = localStorage.getItem(STORAGE_KEY) || 'en';
+        let currentLang = localStorage.getItem(STORAGE_KEY) || 'zh';
 
         function applyLang(lang) {
             currentLang = lang;
