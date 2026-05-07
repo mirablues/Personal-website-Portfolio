@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Analysis NLP | Mira</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* 页面专属样式 (继承全局风格) */
+        .article-header { padding: 100px 0 60px; text-align: center; border-bottom: 1px solid #e6e6e6; }
+        .article-title { font-size: 3.5rem; font-family: var(--font-serif); margin-bottom: 20px; color: #1a1a1a; }
+        .article-meta { color: #888; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 30px; }
+        
+        .article-content { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        .article-section { margin-bottom: 60px; }
+        .article-section h2 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 25px; color: #1a1a1a; }
+        .article-section h3 { font-family: var(--font-sans); font-size: 1.1rem; font-weight: 700; margin: 30px 0 15px; color: #333; text-transform: uppercase; letter-spacing: 1px; }
+        .article-section p { margin-bottom: 20px; color: #555; font-size: 1.05rem; line-height: 1.8; }
+        
+        /* 表格样式 */
+        .data-table { width: 100%; border-collapse: collapse; margin: 30px 0; font-size: 0.9rem; }
+        .data-table th { text-align: left; padding: 15px; border-bottom: 2px solid #d4cdbd; font-family: var(--font-serif); color: #1a1a1a; }
+        .data-table td { padding: 15px; border-bottom: 1px solid #eee; color: #555; }
+        .data-table tr:hover { background: #f9f9f9; }
+        
+        /* 代码块 */
+        .code-block { background: #f4f4f4; padding: 25px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.9rem; overflow-x: auto; color: #333; border-left: 3px solid #d4cdbd; margin: 20px 0; }
+        
+        /* 语言切换按钮 */
+        .lang-toggle { background: none; border: 1px solid #1a1a1a; border-radius: 20px; padding: 4px 14px; font-family: 'Lato', sans-serif; font-size: 0.8rem; letter-spacing: 0.05em; cursor: pointer; color: #1a1a1a; transition: all 0.2s ease; margin-left: 20px; white-space: nowrap; }
+        .lang-toggle:hover { background: #1a1a1a; color: #fff; }
+        nav .menu { display: flex; align-items: center; }
+        .skills-bar { flex-wrap: wrap !important; gap: 8px !important; }
+ 
+        /* 引用块 (用于 Reflection) */
+        .quote-box { background: #fcfcfc; border-left: 3px solid #1a1a1a; padding: 20px 30px; margin: 30px 0; font-style: italic; color: #444; }
+ 
+        @media (max-width: 768px) {
+            .article-title { font-size: 2.5rem; }
+            .data-table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+ 
+    <div class="container">
+        <nav>
+            <div class="logo"><a href="index.html">MIRA.</a></div>
+            <div class="menu">
+                <a href="index.html" data-en="← Back to Home" data-zh="← 返回主页">← Back to Home</a>
+                <button class="lang-toggle" id="langToggle" aria-label="Switch language">中文</button>
+            </div>
+        </nav>
+ 
+        <!-- Header -->
+        <header class="article-header">
+            <div class="article-meta" data-en="Python / NLP / Critical Analysis" data-zh="Python / NLP / 批判性分析">Python / NLP / Critical Analysis</div>
+            <h1 class="article-title" data-en="Text Analysis & Cultural Criticism" data-zh="文本分析与文化批评">Text Analysis & Cultural Criticism</h1>
+            <p style="max-width: 600px; margin: 0 auto; color: #666;"
+               data-en="A computational analysis of Tara McPherson's \"Why Are the Digital Humanities So White?\" using NLTK and custom pipelines."
+               data-zh="使用 NLTK 与自定义流水线对 Tara McPherson 的《为什么数字人文学是白的？》进行计算分析。">
+                A computational analysis of Tara McPherson's "Why Are the Digital Humanities So White?" using NLTK and custom pipelines.
+            </p>
+            
+            <div class="skills-bar" style="border:none; margin-top: 30px; justify-content: center; display: flex;">
+                <span class="skill-item" data-en="Python" data-zh="Python">Python</span>
+                <span class="skill-item" data-en="NLTK Library" data-zh="NLTK 库">NLTK Library</span>
+                <span class="skill-item" data-en="RegEx" data-zh="正则表达式">RegEx</span>
+                <span class="skill-item" data-en="Comparative Analysis" data-zh="对比分析">Comparative Analysis</span>
+            </div>
+        </header>
+ 
+        <article class="article-content">
+            
+            <!-- 1. Intro -->
+            <div class="article-section">
+                <h2 data-en="Project Overview" data-zh="项目概览">Project Overview</h2>
+                <p data-en="Can code reveal the hidden biases in code itself? This project applies Python-based Natural Language Processing (NLP) to analyze Tara McPherson's influential essay, <em>\"Why Are the Digital Humanities So White?
+                   data-zh="代码能否揭示自身内在的隐藏偏见？本项目使用基于 Python 的自然语言处理（NLP）来分析 Tara McPherson 的影响力文章《为什么数字人文学是白的？》。">Can code reveal the hidden biases in code itself? This project applies Python-based Natural Language Processing (NLP) to analyze Tara McPherson's influential essay, <em>"Why Are the Digital Humanities So White?"</em>.</p>
+                <p data-en="By building a custom text mining pipeline, I extracted key thematic patterns to validate whether computational frequency analysis can accurately capture complex cultural arguments regarding race and technology."
+                   data-zh="通过构建自定义文本挖掘流水线，我提取了关键主题模式，以验证计算频率分析能否准确捕捉有关种族与技术的复杂文化论述。">By building a custom text mining pipeline, I extracted key thematic patterns to validate whether computational frequency analysis can accurately capture complex cultural arguments regarding race and technology.</p>
+            </div>
+ 
+            <!-- 2. Methodology -->
+            <div class="article-section">
+                <h2 data-en="The NLP Pipeline" data-zh="NLP 流水线">The NLP Pipeline</h2>
+                <p data-en="I developed a complete workflow using Python's <strong>NLTK</strong> library to process raw text into quantifiable data. The pipeline includes:"
+                   data-zh="我使用 Python 的 <strong>NLTK</strong> 库开发了完整工作流，将原始文本处理为可量化数据。该流水线包含：">I developed a complete workflow using Python's <strong>NLTK</strong> library to process raw text into quantifiable data. The pipeline includes:</p>
+                <ul style="margin-left: 20px; color: #555; line-height: 1.8;">
+                    <li data-en="<strong>Tokenization:</strong> Segmenting text into discrete units." data-zh="<strong>分词：</strong>将文本切分为离散单位。"> <strong>Tokenization:</strong> Segmenting text into discrete units.</li>
+                    <li data-en="<strong>Filtering:</strong> Removing \"stop words\" and applying RegEx to isolate alphanumeric content." data-zh="<strong>过滤：</strong>移除“停用词”，并应用正则表达式提取字母数字内容。"> <strong>Filtering:</strong> Removing "stop words" and applying RegEx to isolate alphanumeric content.</li>
+                    <li data-en="<strong>Lemmatization:</strong> Normalizing words (e.g., converting \"systems\" to \"system\") for accurate counting." data-zh="<strong>词形还原：</strong>规范化词语（例如将“systems”转换为“system”）以提高计数准确性。"> <strong>Lemmatization:</strong> Normalizing words (e.g., converting "systems" to "system") for accurate counting.</li>
+                </ul>
+ 
+                <div class="code-block">
+# Core Logic Snippet
+words = word_tokenize(text_data.lower())
+filtered_words = [
+    lemmatizer.lemmatize(word) 
+    for word in words
+    if word not in stop_words and content.match(word)
+]
+ 
+word_count = collections.Counter(filtered_words)
+top_words = word_count.most_common(50)
+                </div>
+            </div>
+ 
+            <!-- 3. Validation -->
+            <div class="article-section">
+                <h2 data-en="Comparative Validation" data-zh="对比验证">Comparative Validation</h2>
+                <p data-en="To ensure accuracy, I benchmarked my custom Python script against <strong>Voyant Tools</strong>, an industry-standard academic text analysis platform. The results showed a 56% alignment in the top 5 keywords, validating the algorithm's effectiveness."
+                   data-zh="为了保证准确性，我将自定义 Python 脚本与学术界标准文本分析平台 <strong>Voyant Tools</strong> 进行了对比测试。结果显示前 5 个关键词中有 56% 的一致性，从而验证了算法的有效性。">To ensure accuracy, I benchmarked my custom Python script against <strong>Voyant Tools</strong>, an industry-standard academic text analysis platform. The results showed a 56% alignment in the top 5 keywords, validating the algorithm's effectiveness.</p>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th data-en="Rank" data-zh="排名">Rank</th>
+                            <th data-en="Python Output" data-zh="Python 输出">Python Output</th>
+                            <th data-en="Frequency" data-zh="频率">Frequency</th>
+                            <th data-en="Voyant Tools" data-zh="Voyant Tools">Voyant Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>digital</strong></td>
+                            <td>52</td>
+                            <td><strong>digital</strong></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>unix</strong></td>
+                            <td>49</td>
+                            <td><strong>unix</strong></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>also</td>
+                            <td>45</td>
+                            <td>race</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>race</td>
+                            <td>44</td>
+                            <td>modularity</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+ 
+            <!-- 4. Critical Reflection (Digital Humanities Scholar 的核心) -->
+            <div class="article-section">
+                <h2 data-en="Critical Reflection" data-zh="批判性反思">Critical Reflection</h2>
+                <p data-en="This project was not just about coding; it was about critique. As McPherson argues, digital tools are never neutral—they reflect the culture of their creators."
+                data-zh="这个项目不仅关乎编程，更关乎批评。正如 McPherson 所说，数字工具从不中立——它们反映了创造者所处的文化。">
+                    This project was not just about coding; it was about critique. As McPherson argues, digital tools are never neutral—they reflect the culture of their creators.
+                </p>
+
+            <div class="quote-box"
+                data-en="&ldquo;This project reinforced that while computational methods provide powerful analytical capabilities, they must be wielded with critical awareness of their limitations and embedded biases.&rdquo;"
+                data-zh="「这个项目强化了一个观点：尽管计算方法提供了强大的分析能力，但必须带着对其局限性和内嵌偏见的批判意识来使用。」">
+                &ldquo;This project reinforced that while computational methods provide powerful analytical capabilities, they must be wielded with critical awareness of their limitations and embedded biases.&rdquo;
+            </div>
+
+            <p data-en="My analysis revealed that while the algorithm successfully identified technical terms like &ldquo;UNIX&rdquo; and &ldquo;modularity,&rdquo; it struggled with rhetorical nuance. This highlights the necessity of combining <strong>quantitative methods</strong> (coding) with <strong>qualitative reading</strong> (humanities)."
+            data-zh="我的分析发现，尽管算法成功识别了「UNIX」和「modularity」等技术术语，但它难以把握修辞细节。这凸显了将<strong>定量方法</strong>（编码）与<strong>定性阅读</strong>（人文）结合的必要性。">
+                My analysis revealed that while the algorithm successfully identified technical terms like &ldquo;UNIX&rdquo; and &ldquo;modularity,&rdquo; it struggled with rhetorical nuance. This highlights the necessity of combining <strong>quantitative methods</strong> (coding) with <strong>qualitative reading</strong> (humanities).
+            </p>
+        </div>
+ 
+            
+ 
+        </article>
+ 
+        <footer>
+            <p>&copy; 2026 Mira. <a href="index.html" data-en="Back to Home" data-zh="返回主页">Back to Home</a></p>
+        </footer>
+    </div>
+ 
+    <script src="js/script.js"></script>
+    <script>
+(function () {
+    const btn = document.getElementById('langToggle');
+    const STORAGE_KEY = 'mira_lang';
+    let currentLang = localStorage.getItem(STORAGE_KEY) || 'en';
+    function applyLang(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        localStorage.setItem(STORAGE_KEY, lang);
+        btn.textContent = lang === 'zh' ? 'EN' : '中文';
+        document.querySelectorAll('[data-en],[data-zh]').forEach(el => {
+            const text = el.getAttribute('data-' + lang);
+            if (text !== null) el.innerHTML = text;
+        });
+    }
+    applyLang(currentLang);
+    btn.addEventListener('click', () => applyLang(currentLang === 'en' ? 'zh' : 'en'));
+})();
+    </script>
+</body>
+</html>
