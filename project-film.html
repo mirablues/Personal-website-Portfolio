@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Data Visualization | Mira</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ── 继承自 project-bechdel.html 的通用文章页样式 ── */
+        .article-header { padding: 100px 0 60px; text-align: center; border-bottom: 1px solid #e6e6e6; }
+        .article-title  { font-size: 3.5rem; font-family: var(--font-serif); margin-bottom: 20px; color: #1a1a1a; }
+        .article-meta   { color: #888; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 30px; }
+
+        .article-content  { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        .article-section  { margin-bottom: 60px; }
+        .article-section h2 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 25px; color: #1a1a1a; }
+        .article-section h3 { font-family: var(--font-sans); font-size: 1.1rem; font-weight: 700; margin: 35px 0 15px; color: #333; text-transform: uppercase; letter-spacing: 1px; }
+        .article-section p  { margin-bottom: 20px; color: #555; font-size: 1.05rem; line-height: 1.8; }
+
+        /* 数据统计格 */
+        .stats-grid   { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 40px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 30px 0; }
+        .stat-item    { text-align: center; }
+        .stat-number  { font-family: var(--font-serif); font-size: 2.5rem; color: #1a1a1a; display: block; }
+        .stat-label   { font-size: 0.8rem; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* 代码块 */
+        .code-block { background: #f4f4f4; padding: 25px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.88rem; overflow-x: auto; color: #333; border-left: 3px solid #d4cdbd; margin: 20px 0; line-height: 1.6; }
+
+        /* 发现列表 */
+        .findings-list { list-style: none; padding: 0; }
+        .findings-list li { margin-bottom: 16px; position: relative; padding-left: 22px; color: #555; line-height: 1.7; }
+        .findings-list li::before { content: "•"; color: #d4cdbd; font-size: 1.4rem; position: absolute; left: 0; top: -4px; }
+
+        /* 可视化图表占位框（放截图用）*/
+        .viz-block { margin: 30px 0; border: 1px solid #e8e8e8; border-radius: 4px; overflow: hidden; background: #fafafa; }
+        .viz-block img { width: 100%; display: block; }
+        .viz-caption { padding: 12px 18px; font-size: 0.82rem; color: #999; border-top: 1px solid #eee; font-style: italic; }
+
+        /* 语言切换按钮（与 index.html 一致）*/
+        .lang-toggle { background: none; border: 1px solid #1a1a1a; border-radius: 20px; padding: 4px 14px; font-family: 'Lato', sans-serif; font-size: 0.8rem; letter-spacing: 0.05em; cursor: pointer; color: #1a1a1a; transition: all 0.2s ease; margin-left: 20px; white-space: nowrap; }
+        .lang-toggle:hover { background: #1a1a1a; color: #fff; }
+        nav .menu { display: flex; align-items: center; }
+
+        @media (max-width: 768px) {
+            .article-title { font-size: 2.4rem; }
+            .stats-grid    { grid-template-columns: 1fr 1fr; gap: 28px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 导航 -->
+    <nav>
+        <div class="logo"><a href="index.html">MIRA.</a></div>
+        <div class="menu">
+            <a href="index.html" data-en="← Back to Home" data-zh="← 返回主页">← Back to Home</a>
+            <button class="lang-toggle" id="langToggle" aria-label="Switch language">中文</button>
+        </div>
+    </nav>
+
+    <!-- 头部 -->
+    <header class="article-header">
+        <div class="article-meta"
+             data-en="Data Visualization / R · Python · Gephi / Jan – Apr 2026"
+             data-zh="数据可视化 / R · Python · Gephi / 2026年1月 – 4月">
+            Data Visualization / R · Python · Gephi / Jan – Apr 2026
+        </div>
+        <h1 class="article-title"
+            data-en="Global Film Industry: A Multi-Dimensional Analysis"
+            data-zh="全球电影产业：多维度可视化分析">
+            Global Film Industry: A Multi-Dimensional Analysis
+        </h1>
+        <p style="max-width: 640px; margin: 0 auto; color: #666;"
+           data-en="Seven visualizations—bar charts, heatmaps, scatter plots, lollipop charts, and a Gephi network—interrogating 40 years of global film data across genre, budget, revenue, and geopolitical dominance."
+           data-zh="七组可视化图表——条形图、热力图、散点图、棒棒糖图与 Gephi 网络图——对全球四十年电影数据的类型、预算、票房与地缘结构进行系统性审视。">
+            Seven visualizations—bar charts, heatmaps, scatter plots, lollipop charts, and a Gephi network—interrogating 40 years of global film data across genre, budget, revenue, and geopolitical dominance.
+        </p>
+
+        <div class="skills-bar" style="border:none; margin-top: 30px; justify-content: center; display: flex; flex-wrap: wrap; gap: 8px;">
+            <span class="skill-item">R / ggplot2</span>
+            <span class="skill-item">Python / Pandas</span>
+            <span class="skill-item">Gephi</span>
+            <span class="skill-item" data-en="Data Cleaning" data-zh="数据清洗">Data Cleaning</span>
+            <span class="skill-item" data-en="Network Analysis" data-zh="网络分析">Network Analysis</span>
+        </div>
+    </header>
+
+    <!-- 正文 -->
+    <article class="article-content">
+
+        <!-- 1. 项目概览 -->
+        <div class="article-section">
+            <h2 data-en="Project Overview" data-zh="项目概览">Project Overview</h2>
+            <p data-en="What does 40 years of global cinema look like when rendered as data? This project applies multiple visualization methods to a Kaggle dataset of 7,668 films (1980–2020), covering genre, release year, director, production budget, and gross revenue."
+               data-zh="将四十年的全球电影数据化之后，呈现的是什么样的图景？本项目对一个包含 7,668 部影片（1980–2020）的 Kaggle 数据集应用多种可视化方法，涵盖类型、上映年份、导演、制作预算与全球票房。">
+                What does 40 years of global cinema look like when rendered as data? This project applies multiple visualization methods to a Kaggle dataset of 7,668 films (1980–2020), covering genre, release year, director, production budget, and gross revenue.
+            </p>
+            <p data-en="The goal was not simply to chart trends, but to expose structural patterns: which genres dominate and why, how investment correlates with return, and—most critically—how American cinema's gravitational pull shapes (and marginalizes) global film production."
+               data-zh="目标不只是呈现趋势，而是揭示结构性规律：哪些类型长期主导市场及其原因、投资与回报的相关性，以及最关键的——好莱坞的强大引力如何塑造（并边缘化）全球其他地区的电影生产。">
+                The goal was not simply to chart trends, but to expose structural patterns: which genres dominate and why, how investment correlates with return, and—most critically—how American cinema's gravitational pull shapes (and marginalizes) global film production.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">7,668</span>
+                    <span class="stat-label" data-en="Films" data-zh="部影片">Films</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">7</span>
+                    <span class="stat-label" data-en="Visualizations" data-zh="组图表">Visualizations</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">40</span>
+                    <span class="stat-label" data-en="Years of Data" data-zh="年数据跨度">Years of Data</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label" data-en="Tools" data-zh="分析工具">Tools</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 数据处理 -->
+        <div class="article-section">
+            <h2 data-en="Data Pipeline" data-zh="数据处理流程">Data Pipeline</h2>
+            <p data-en="The raw CSV was largely usable for genre and temporal analysis. Financial visualizations, however, required targeted cleaning: rows with missing budget or revenue values were removed using <code>!is.na()</code>, reducing the financial subset to 5,436 films. This filter was applied only where necessary; all other charts used the complete dataset."
+               data-zh="原始 CSV 文件在类型和时间维度的分析上基本可直接使用。但涉及财务数据的可视化需要针对性清洗：使用 <code>!is.na()</code> 删除预算或票房缺失的行，将财务子集精简至 5,436 部影片。该过滤仅在必要处应用，其他图表均使用完整数据集。">
+                The raw CSV was largely usable for genre and temporal analysis. Financial visualizations, however, required targeted cleaning: rows with missing budget or revenue values were removed using <code>!is.na()</code>, reducing the financial subset to 5,436 films. This filter was applied only where necessary; all other charts used the complete dataset.
+            </p>
+            <p data-en="For the Gephi network, the dataset required more substantial transformation. I used Python to parse and clean the data, then generated two separate CSV files—nodes and edges—encoding country–genre relationships weighted by film count."
+               data-zh="针对 Gephi 网络图，数据集需要更大幅度的转换。我使用 Python 解析并清洗数据，随后生成节点与边两个独立 CSV 文件，以影片数量为权重编码国家–类型关系。">
+                For the Gephi network, the dataset required more substantial transformation. I used Python to parse and clean the data, then generated two separate CSV files—nodes and edges—encoding country–genre relationships weighted by film count.
+            </p>
+
+            <h3 data-en="Decade Grouping (R)" data-zh="年代分组（R）">Decade Grouping (R)</h3>
+            <div class="code-block">
+# Convert precise year to decade label
+movies$decade &lt;- paste0(floor(movies$year / 10) * 10, "s")
+
+# Aggregate by decade and genre
+genre_decade &lt;- aggregate(title ~ genre + decade,
+                           data = movies, FUN = length)
+names(genre_decade)[3] &lt;- "count"
+            </div>
+
+            <h3 data-en="Gephi Node/Edge Generation (Python)" data-zh="Gephi 节点/边文件生成（Python）">Gephi Node/Edge Generation (Python)</h3>
+            <div class="code-block">
+import pandas as pd
+
+df = pd.read_csv("movies.csv").dropna(subset=["country", "genre"])
+
+# Nodes: countries + genres as distinct node types
+countries = pd.DataFrame({"id": df["country"].unique(), "label": df["country"].unique(), "category": "country"})
+genres    = pd.DataFrame({"id": df["genre"].unique(),   "label": df["genre"].unique(),   "category": "genre"})
+nodes = pd.concat([countries, genres], ignore_index=True)
+
+# Edges: weighted by co-occurrence count
+edges = (df.groupby(["country", "genre"])
+           .size()
+           .reset_index(name="weight")
+           .rename(columns={"country": "source", "genre": "target"}))
+
+nodes.to_csv("nodes.csv", index=False)
+edges.to_csv("edges.csv", index=False)
+            </div>
+        </div>
+
+        <!-- 3. 图表介绍（6 图）-->
+        <div class="article-section">
+            <h2 data-en="Visualizations" data-zh="可视化图表">Visualizations</h2>
+
+            <!-- Bar Chart -->
+            <h3 data-en="01 — Bar Chart: Genre Distribution" data-zh="01 — 条形图：类型分布">01 — Bar Chart: Genre Distribution</h3>
+            <p data-en="Comedy (2,245) and Action (1,705) lead production volume by a wide margin, with Drama (1,518) third. At the other extreme, Western, Musical, and Sport categories register single-digit counts—reflecting not their absence from cinema, but the dataset's single-genre labeling constraint, which systematically underrepresents hybrid films."
+               data-zh="喜剧（2,245 部）和动作（1,705 部）在产量上遥遥领先，剧情片（1,518 部）居第三。另一极端，西部片、音乐剧、体育片数量仅为个位数——这并非这些类型在电影史上的真实地位，而是数据集单一类型标签机制系统性低估了跨类型影片所致。">
+                Comedy (2,245) and Action (1,705) lead production volume by a wide margin, with Drama (1,518) third. At the other extreme, Western, Musical, and Sport categories register single-digit counts—reflecting not their absence from cinema, but the dataset's single-genre labeling constraint, which systematically underrepresents hybrid films.
+            </p>
+            <!-- 替换 src 为你自己的截图路径 -->
+            <div class="viz-block">
+                <img src="assets/viz/bar-genre.png" alt="Bar chart: number of movies by genre 1980-2020" onerror="this.closest('.viz-block').style.display='none'">
+                <div class="viz-caption" data-en="Fig 1. Number of Movies by Genre (1980–2020). Built with ggplot2; no additional packages required." data-zh="图1. 各类型电影数量（1980–2020）。使用 ggplot2 构建，无需额外安装包。">Fig 1. Number of Movies by Genre (1980–2020). Built with ggplot2; no additional packages required.</div>
+            </div>
+
+            <!-- Line Chart -->
+            <h3 data-en="02 — Line Chart: Genre Trends Over Time" data-zh="02 — 折线图：类型产量历年趋势">02 — Line Chart: Genre Trends Over Time</h3>
+            <p data-en="Comedy dominated consistently through the 1990s and 2000s, but Action overtook it around 2010—a visible shift in global market appetite. The most striking signal across all genres: a near-vertical decline beginning in 2020, uniformly confirming the COVID-19 pandemic's industry-wide production halt."
+               data-zh="喜剧在1990至2000年代持续主导市场，但动作片在2010年前后实现反超——全球市场口味转变的明确信号。所有类型中最显著的信号：2020年起几乎垂直的产量下滑，一致印证了新冠疫情对整个行业生产的全面冲击。">
+                Comedy dominated consistently through the 1990s and 2000s, but Action overtook it around 2010—a visible shift in global market appetite. The most striking signal across all genres: a near-vertical decline beginning in 2020, uniformly confirming the COVID-19 pandemic's industry-wide production halt.
+            </p>
+            <div class="viz-block">
+                <img src="assets/viz/line-genre-trends.png" alt="Line chart: genre trends 1980-2020" onerror="this.closest('.viz-block').style.display='none'">
+                <div class="viz-caption" data-en="Fig 2. Genre Trends Over Time (1980–2020). Data grouped using aggregate(); built with ggplot2." data-zh="图2. 各类型电影历年产量趋势（1980–2020）。使用 aggregate() 分组，ggplot2 绘制。">Fig 2. Genre Trends Over Time (1980–2020). Data grouped using aggregate(); built with ggplot2.</div>
+            </div>
+
+            <!-- Scatter Plot -->
+            <h3 data-en="03 — Scatter Plot: Budget vs. Gross Revenue" data-zh="03 — 散点图：制作预算 vs. 全球票房">03 — Scatter Plot: Budget vs. Gross Revenue</h3>
+            <p data-en="A clear positive correlation holds across the dataset: higher production investment tends to yield higher box office returns. Both axes use log scales to prevent the wide value range (thousands to hundreds of millions) from compressing the majority of data points into an unreadable corner. Action and Adventure films cluster visibly at the high end of both axes. Outliers—low-budget overperformers and high-budget flops—are equally visible, and equally important."
+               data-zh="数据集中存在明显的正相关关系：更高的制作投入通常带来更高的票房回报。两轴均采用对数刻度，避免极宽的数值范围（从数千到数亿美元）将大多数数据点压缩至图表一角。动作片与冒险片明显集中在两轴高端。低成本高回报的黑马与高成本票房惨败的案例同样清晰可见，同样重要。">
+                A clear positive correlation holds across the dataset: higher production investment tends to yield higher box office returns. Both axes use log scales to prevent the wide value range (thousands to hundreds of millions) from compressing the majority of data points into an unreadable corner. Action and Adventure films cluster visibly at the high end of both axes. Outliers—low-budget overperformers and high-budget flops—are equally visible, and equally important.
+            </p>
+            <div class="viz-block">
+                <img src="assets/viz/scatter-budget-revenue.png" alt="Scatter plot: budget vs gross revenue" onerror="this.closest('.viz-block').style.display='none'">
+                <div class="viz-caption" data-en="Fig 3. Movie Budget vs. Gross Revenue (1980–2020, log-log scale). Requires ggplot2 + scales." data-zh="图3. 制作预算与全球票房（1980–2020，双对数坐标）。需要 ggplot2 + scales 包。">Fig 3. Movie Budget vs. Gross Revenue (1980–2020, log-log scale). Requires ggplot2 + scales.</div>
+            </div>
+
+            <!-- Heatmap -->
+            <h3 data-en="04 — Heatmap: Genre Output by Decade" data-zh="04 — 热力图：各年代类型产量">04 — Heatmap: Genre Output by Decade</h3>
+            <p data-en="Color intensity encodes production volume; numerical annotations add precision. Comedy peaked in the 1990s (678 films) before declining; Action grew steadily, peaking in the 2010s (547 films)—reflecting the industry's accelerating pivot toward commercial franchises. The sparse 2020s column is not a data gap but a direct imprint of the pandemic."
+               data-zh="颜色深度编码产量规模，数值标注确保精度。喜剧在1990年代达到顶峰（678部）后开始下滑；动作片稳步增长，在2010年代达到顶峰（547部）——这映射出整个行业向商业franchise影片加速转型的趋势。2020年代的稀疏数据并非数据缺口，而是疫情的直接烙印。">
+                Color intensity encodes production volume; numerical annotations add precision. Comedy peaked in the 1990s (678 films) before declining; Action grew steadily, peaking in the 2010s (547 films)—reflecting the industry's accelerating pivot toward commercial franchises. The sparse 2020s column is not a data gap but a direct imprint of the pandemic.
+            </p>
+            <div class="viz-block">
+                <img src="assets/viz/heatmap-decade.png" alt="Heatmap: genre output by decade" onerror="this.closest('.viz-block').style.display='none'">
+                <div class="viz-caption" data-en="Fig 4. Movie Output by Genre and Decade. geom_tile() + geom_text(); base R for decade grouping." data-zh="图4. 各年代类型产量热力图。geom_tile() + geom_text()；年代分组使用 base R。">Fig 4. Movie Output by Genre and Decade. geom_tile() + geom_text(); base R for decade grouping.</div>
+            </div>
+
+            <!-- Lollipop Charts -->
+            <h3 data-en="05 — Lollipop Charts: Average Revenue & Profit by Genre" data-zh="05 — 棒棒糖图：各类型平均票房与利润">05 — Lollipop Charts: Average Revenue & Profit by Genre</h3>
+            <p data-en="Despite being far outnumbered in production volume, Animation and Family films achieve the highest average box office revenue and profit margins. This counterintuitive finding demands methodological honesty: both genres have small sample sizes, making their averages susceptible to inflation by a handful of blockbusters. For genres with large samples—Action, Comedy, Drama—the averages are more reliable, and they confirm sustained commercial viability as the engine behind continued studio investment."
+               data-zh="尽管在产量上远不及喜剧和动作片，动画片与家庭片却取得了最高的平均票房和利润率。这一反直觉的发现需要方法论上的诚实：两种类型的样本量较小，均值极易被少数几部爆款抬高。对于样本量较大的类型——动作、喜剧、剧情——平均值更具参考价值，它们印证了稳定的商业回报是片厂持续重仓投入的核心驱动力。">
+                Despite being far outnumbered in production volume, Animation and Family films achieve the highest average box office revenue and profit margins. This counterintuitive finding demands methodological honesty: both genres have small sample sizes, making their averages susceptible to inflation by a handful of blockbusters. For genres with large samples—Action, Comedy, Drama—the averages are more reliable, and they confirm sustained commercial viability as the engine behind continued studio investment.
+            </p>
+            <div class="viz-block">
+                <img src="assets/viz/lollipop-revenue.png" alt="Lollipop chart: average gross revenue by genre" onerror="this.closest('.viz-block').style.display='none'">
+                <div class="viz-caption" data-en="Fig 5a. Average Gross Revenue by Genre (1980–2020). Requires ggplot2 + scales." data-zh="图5a. 各类型平均票房（1980–2020）。需要 ggplot2 + scales 包。">Fig 5a. Average Gross Revenue by Genre (1980–2020). Requires ggplot2 + scales.</div>
+            </div>
+            <div class="viz-block">
+                <img src="assets/viz/lollipop-profit.png" alt="Lollipop chart: average profit by genre" onerror="this.closest('.viz-block').style.display='none'">
+                <div class="viz-caption" data-en="Fig 5b. Average Profit by Genre (1980–2020). Profit = gross revenue − production budget." data-zh="图5b. 各类型平均利润（1980–2020）。利润 = 全球票房 − 制作预算。">Fig 5b. Average Profit by Genre (1980–2020). Profit = gross revenue − production budget.</div>
+            </div>
+
+            <!-- Gephi -->
+            <h3 data-en="06 — Gephi Network: Country–Genre Bipartite Graph" data-zh="06 — Gephi 网络图：国家–类型二部图">06 — Gephi Network: Country–Genre Bipartite Graph</h3>
+            <p data-en="The bipartite network maps countries (pink nodes) to genres (green nodes), with edge weight proportional to film count. The result is unambiguous: the United States dominates every major genre simultaneously, its edges dwarfing those of all other nations combined. Hollywood's structural centrality is not merely quantitative—it defines what genres get made, at what scale, and how the global film ecosystem is organized around a single gravitational center."
+               data-zh="二部图网络将国家（粉色节点）与类型（绿色节点）相连，边的粗细与影片数量成正比。结果一目了然：美国同时主导所有主要类型，其边的粗度使其他所有国家加起来都相形见绌。好莱坞的结构性中心地位不仅仅是数量上的——它决定了哪些类型会被制作、以何种规模制作，以及整个全球电影生态如何围绕这一单一引力中心组织运转。">
+                The bipartite network maps countries (pink nodes) to genres (green nodes), with edge weight proportional to film count. The result is unambiguous: the United States dominates every major genre simultaneously, its edges dwarfing those of all other nations combined. Hollywood's structural centrality is not merely quantitative—it defines what genres get made, at what scale, and how the global film ecosystem is organized around a single gravitational center.
+            </p>
+            <div class="viz-block">
+                <img src="assets/viz/gephi-network.png" alt="Gephi bipartite network: country-genre relationships" onerror="this.closest('.viz-block').style.display='none'">
+                <div class="viz-caption" data-en="Fig 6. Country–Genre Bipartite Network. Nodes and edges generated via Python; visualized in Gephi." data-zh="图6. 国家–类型二部图网络。节点与边通过 Python 生成，在 Gephi 中可视化。">Fig 6. Country–Genre Bipartite Network. Nodes and edges generated via Python; visualized in Gephi.</div>
+            </div>
+        </div>
+
+        <!-- 4. 关键发现 -->
+        <div class="article-section">
+            <h2 data-en="Key Findings" data-zh="关键发现">Key Findings</h2>
+            <ul class="findings-list">
+                <li data-en="<strong>Genre dominance is durable but shifting.</strong> Comedy and Action have led production for four decades; however, Action's acceleration after 2010 signals a structural tilt toward franchise-driven commercial cinema." data-zh="<strong>类型主导地位持久但在变化。</strong>喜剧与动作片引领产量长达四十年；然而动作片在2010年后的加速增长，标志着整个行业向franchise商业电影的结构性倾斜。"><strong>Genre dominance is durable but shifting.</strong> Comedy and Action have led production for four decades; however, Action's acceleration after 2010 signals a structural tilt toward franchise-driven commercial cinema.</li>
+                <li data-en="<strong>Budget correlates with revenue—but not perfectly.</strong> The scatter plot confirms a positive relationship, yet outliers in both directions remind us that marketing, timing, and cultural resonance are variables no budget line can control." data-zh="<strong>预算与票房正相关，但并非完美线性。</strong>散点图确认了正相关关系，但两个方向上的异常值提醒我们：营销、档期与文化共鸣是任何预算数字都无法控制的变量。"><strong>Budget correlates with revenue—but not perfectly.</strong> The scatter plot confirms a positive relationship, yet outliers in both directions remind us that marketing, timing, and cultural resonance are variables no budget line can control.</li>
+                <li data-en="<strong>Animation punches above its weight.</strong> With far fewer releases, animated films consistently outperform in average revenue and profit—evidence of broader audience reach and franchise potential." data-zh="<strong>动画片以少胜多。</strong>在发行数量远少于其他类型的情况下，动画片在平均票房与利润上持续领先——这是更广泛受众覆盖与 franchise 潜力的体现。"><strong>Animation punches above its weight.</strong> With far fewer releases, animated films consistently outperform in average revenue and profit—evidence of broader audience reach and franchise potential.</li>
+                <li data-en="<strong>Hollywood is not just dominant—it is structurally centralizing.</strong> The Gephi network reveals that US production volume is so disproportionate that it effectively defines genre norms for the entire global industry, leaving other national cinemas in its peripheral orbit." data-zh="<strong>好莱坞不只是主导——它在结构上具有中心化效应。</strong>Gephi 网络图揭示，美国的制作规模失衡到足以为全球电影产业定义类型规范，使其他国家的电影工业留在其边缘轨道上。"><strong>Hollywood is not just dominant—it is structurally centralizing.</strong> The Gephi network reveals that US production volume is so disproportionate that it effectively defines genre norms for the entire global industry, leaving other national cinemas in its peripheral orbit.</li>
+                <li data-en="<strong>2020 is a hard break in every trend line.</strong> The COVID-19 pandemic is not background noise in this dataset—it is a visible, industry-wide cliff edge that interrupts four decades of continuous growth." data-zh="<strong>2020年是每条趋势线上的硬性断点。</strong>新冠疫情在这个数据集中不是背景噪音——它是清晰可见的、全行业性的悬崖边缘，打断了四十年的持续增长。"><strong>2020 is a hard break in every trend line.</strong> The COVID-19 pandemic is not background noise in this dataset—it is a visible, industry-wide cliff edge that interrupts four decades of continuous growth.</li>
+            </ul>
+        </div>
+
+        <!-- 5. 反思 -->
+        <div class="article-section">
+            <h2 data-en="Limitations & Reflection" data-zh="局限性与反思">Limitations & Reflection</h2>
+            <p data-en="This dataset assigns each film a single primary genre—a simplification that systematically undercounts hybrid films and inflates the apparent dominance of a few major categories. A more granular multi-label dataset would produce meaningfully different distributions."
+               data-zh="该数据集为每部影片分配单一主要类型——这种简化系统性地低估了跨类型影片，并人为放大了少数主要类型的表观主导地位。采用更细粒度的多标签数据集将产生有意义的不同分布。">
+                This dataset assigns each film a single primary genre—a simplification that systematically undercounts hybrid films and inflates the apparent dominance of a few major categories. A more granular multi-label dataset would produce meaningfully different distributions.
+            </p>
+            <p data-en="Financial data was disproportionately absent for independent and non-English-language productions, which means the budget-revenue analysis skews toward large commercial releases. Any conclusions about profitability should be read as conclusions about <em>studio-scale</em> profitability specifically."
+               data-zh="财务数据的缺失在独立制作和非英语影片中尤为集中，这意味着预算–票房分析偏向大型商业发行。任何关于盈利能力的结论都应被理解为专门针对<em>片厂规模</em>盈利能力的结论。">
+                Financial data was disproportionately absent for independent and non-English-language productions, which means the budget-revenue analysis skews toward large commercial releases. Any conclusions about profitability should be read as conclusions about <em>studio-scale</em> profitability specifically.
+            </p>
+        </div>
+
+        
+
+    </article>
+
+    <footer>
+        <p>&copy; 2026 Mira. <a href="index.html" data-en="Back to Home" data-zh="返回主页">Back to Home</a></p>
+    </footer>
+</div>
+
+<script src="js/script.js"></script>
+<script>
+(function () {
+    const btn = document.getElementById('langToggle');
+    const STORAGE_KEY = 'mira_lang';
+    let currentLang = localStorage.getItem(STORAGE_KEY) || 'en';
+
+    function applyLang(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        localStorage.setItem(STORAGE_KEY, lang);
+        btn.textContent = lang === 'zh' ? 'EN' : '中文';
+        document.querySelectorAll('[data-en],[data-zh]').forEach(el => {
+            const text = el.getAttribute('data-' + lang);
+            if (text !== null) el.innerHTML = text;
+        });
+    }
+
+    applyLang(currentLang);
+    btn.addEventListener('click', () => applyLang(currentLang === 'en' ? 'zh' : 'en'));
+})();
+</script>
+</body>
+</html>
