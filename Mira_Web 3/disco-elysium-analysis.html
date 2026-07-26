@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>极乐迪斯科：策划视角的拆解 - Mira</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Serif+SC:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --gdd-bg: #fafaf8;
+            --gdd-line: #e6e6e6;
+            --gdd-text: #2c2c2c;
+            --gdd-muted: #666666;
+            --gdd-code-bg: #f3f2ee;
+            --gdd-accent: #8a7e70;
+            --gdd-lock: #b84040;
+            --gdd-open: #4a9a54;
+        }
+
+        .article-header { padding: 90px 0 50px; text-align: center; border-bottom: 1px solid var(--gdd-line); }
+        .article-title  { font-size: 3rem; font-family: var(--font-serif); margin-bottom: 16px; color: #1a1a1a; letter-spacing: 1px; }
+        .article-meta   { color: #888; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 26px; }
+
+        .gdd-content { max-width: 860px; margin: 0 auto; padding: 60px 20px; }
+        .gdd-section { margin-bottom: 56px; }
+
+        .gdd-section h2 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+        .gdd-section h2 .sec-en {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.92rem;
+            font-weight: 400;
+            color: var(--gdd-accent);
+            margin-bottom: 20px;
+            margin-top: 4px;
+        }
+
+        .gdd-section h3 { font-family: 'Noto Serif SC', serif; font-size: 1.02rem; font-weight: 600; margin: 22px 0 12px; color: #1a1a1a; }
+
+        .gdd-section p { margin-bottom: 14px; color: var(--gdd-text); font-size: 0.98rem; line-height: 1.85; text-align: justify; }
+
+        .overview-board { background: var(--gdd-bg); border-radius: 8px; padding: 28px 30px; margin-bottom: 10px; }
+        .overview-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; color: var(--gdd-accent); margin-bottom: 16px; }
+        .overview-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; font-size: 0.92rem; color: var(--gdd-text); }
+        .overview-item strong { color: #1a1a1a; }
+
+        .case-box { background: var(--gdd-bg); border-radius: 8px; padding: 26px 28px; margin: 22px 0; }
+        .case-box-title { font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 1rem; margin-bottom: 16px; color: #1a1a1a; }
+
+        .table-scroll { overflow-x: auto; }
+        table.simple-table { width: 100%; min-width: 480px; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+        table.simple-table th { text-align: left; padding: 10px 8px; border-bottom: 2px solid var(--gdd-line); font-weight: 700; color: #1a1a1a; background: #fafafa; }
+        table.simple-table td { padding: 11px 8px; border-bottom: 1px solid var(--gdd-line); color: var(--gdd-muted); vertical-align: top; }
+
+        .gdd-block { margin-bottom: 20px; padding-left: 16px; border-left: 2px solid var(--gdd-accent); }
+        .gdd-block h4 { font-family: 'Noto Serif SC', serif; font-size: 0.96rem; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; }
+        .gdd-block p { font-size: 0.9rem; color: var(--gdd-muted); margin-bottom: 0; line-height: 1.8; }
+
+        blockquote.excerpt {
+            margin: 18px 0; padding: 14px 20px; border-left: 3px solid var(--gdd-accent);
+            font-family: 'Noto Serif SC', serif; font-size: 0.92rem; color: #555; background: var(--gdd-bg); border-radius: 0 8px 8px 0;
+        }
+        blockquote.excerpt p { margin-bottom: 6px; color: #444; font-style: normal; }
+        blockquote.excerpt .en { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #777; }
+        .speaker { font-weight: 600; color: #1a1a1a; }
+
+        .flow-diagram { margin: 6px 0 22px; }
+        .flow-row { display: flex; gap: 14px; margin-bottom: 4px; flex-wrap: wrap; }
+        .flow-box { flex: 1 1 180px; border: 1px solid var(--gdd-line); background: #fff; border-radius: 6px; padding: 14px 16px; }
+        .flow-box-title { font-weight: 700; font-size: 0.84rem; margin-bottom: 6px; color: #1a1a1a; }
+        .flow-effect { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #333; background: var(--gdd-code-bg); padding: 2px 8px; border-radius: 4px; margin-bottom: 6px; }
+        .flow-desc { font-size: 0.8rem; color: var(--gdd-muted); line-height: 1.6; }
+        .flow-arrow { text-align: center; font-size: 0.8rem; color: var(--gdd-muted); margin: 10px 0; }
+        .flow-box.outcome-lock { border-color: var(--gdd-lock); }
+        .flow-box.outcome-open { border-color: var(--gdd-open); }
+
+        code { font-family: 'JetBrains Mono', monospace; background: var(--gdd-code-bg); padding: 1px 5px; border-radius: 3px; font-size: 0.85em; }
+
+        .demo-cta {
+            display: inline-block; margin-top: 14px; padding: 12px 30px; border-radius: 50px;
+            background: #1a1a1a; color: #fff; font-weight: 600; font-size: 0.9rem; text-decoration: none;
+            transition: 0.3s;
+        }
+        .demo-cta:hover { background: #333; transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.12); }
+
+        .source-note { font-size: 0.8rem; color: #999; border-top: 1px solid var(--gdd-line); padding-top: 20px; margin-top: 10px; line-height: 1.8; }
+
+        @media (max-width: 700px) {
+            .article-title { font-size: 2rem; }
+            .overview-grid { grid-template-columns: 1fr; }
+            .flow-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 导航 -->
+    <nav>
+        <div class="logo"><a href="index.html">MIRA.</a></div>
+        <div class="menu">
+            <a href="index.html" data-en="← Back to Home" data-zh="← 返回主页">← 返回主页</a>
+            <button class="lang-toggle" id="langToggle" aria-label="Switch language">EN</button>
+        </div>
+    </nav>
+
+    <!-- 文章头部 -->
+    <header class="article-header">
+        <div class="article-meta">游戏拆解 · Design Teardown · 2026</div>
+        <h1 class="article-title">DISCO ELYSIUM</h1>
+        <p style="max-width: 640px; margin: 0 auto; color: #666; font-size: 1.02rem; line-height: 1.8;">
+            我完成过两篇关于《极乐迪斯科》的论文：一篇从叙事理论出发，讨论失忆和创伤如何撬动身份建构；另一篇专门拆了它的技能、骰子、对话这些具体机制，讨论心理健康议题是怎么被写进系统里的。这个拆解笔记，重点回答一个问题：这些机制到底是怎么做到既好玩、又让人共情的？
+        </p>
+        <div class="skills-bar" style="border:none; margin-top: 28px; justify-content: center; display: flex; flex-wrap: wrap; gap: 10px;">
+            <span class="skill-item">竞品拆解</span>
+            <span class="skill-item">系统机制分析</span>
+            <span class="skill-item">叙事设计研究</span>
+            <span class="skill-item">玩家反馈分析</span>
+        </div>
+    </header>
+
+    <div class="gdd-content">
+
+        <!-- 0. 项目速览 -->
+        <div class="overview-board">
+            <div class="overview-title">项目速览</div>
+            <div class="overview-grid">
+                <div class="overview-item">
+                    <strong>开发 / 发行：</strong>ZA/UM，2019 年发售。
+                </div>
+                <div class="overview-item">
+                    <strong>类型：</strong>等距 CRPG，没有战斗系统，靠技能检定和对话推进剧情。
+                </div>
+                <div class="overview-item">
+                    <strong>荣誉：</strong>The Game Awards 2019「最佳叙事」「最佳角色扮演游戏」。
+                </div>
+                <div class="overview-item">
+                    <strong>为什么拆这款：</strong>它把"失忆侦探破案"包装成一次关于身份、创伤和心理健康的系统化表达，而且几乎所有严肃议题都是靠可交互的机制传达的，不是靠过场动画讲道理。
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. 技能检定与骰子 -->
+        <div class="gdd-section">
+            <h2>一、技能检定与骰子：把内心状态变成可读的数值</h2>
+            <p>角色创建时会分配 4 大属性——Intellect（智力）、Psyche（心理）、Physique（体格）、Motorics（运动神经），每个属性下面各挂 6 项细分技能，一共 24 项。玩家往哪项技能上加点，实际上就是在决定"这个侦探是靠什么活下来的人"：靠理性推理，靠直觉共情，还是靠一身蛮力。技能不是摆设，它直接影响骰子检定的成功率，也直接决定哪些对话选项能解锁。</p>
+
+            <h3>白色检定 vs 红色检定</h3>
+            <div class="flow-diagram">
+                <div class="flow-row">
+                    <div class="flow-box outcome-open">
+                        <div class="flow-box-title">白色检定（White Check）</div>
+                        <div class="flow-effect">可重试</div>
+                        <div class="flow-desc">失败了也没关系，把对应技能点数堆高一点，或者换件装备、嗑点药，回头还能再试一次。容错率高，适合日常判定。</div>
+                    </div>
+                    <div class="flow-box outcome-lock">
+                        <div class="flow-box-title">红色检定（Red Check）</div>
+                        <div class="flow-effect">只有一次机会</div>
+                        <div class="flow-desc">失败了就是失败了，这条线永久关闭，不会给第二次机会。用在真正关键的剧情节点上，逼玩家在下手之前认真权衡。</div>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--gdd-muted);">这个设计挺聪明：如果所有判定都能无限重试，骰子就只是个装饰；如果所有判定都不能重试，游戏会变得很折磨人。用两种检定分层处理，日常判定给容错空间，关键判定保留真实的风险感，这样骰子才有意义。</p>
+
+            <div class="case-box">
+                <div class="case-box-title">案例：一次验尸，串起五项技能检定</div>
+                <p style="font-size:0.9rem; color:var(--gdd-muted); margin-bottom:16px;">
+                    死者最初看起来像是上吊自杀，但一连串技能检定会一步步推翻这个结论：先是 <strong>Visual Calculus</strong> 检定成功，发现尸体周围有八组不同的脚印；然后是 <strong>Endurance</strong> 检定，让主角能顶住一具放了一周的尸体的臭味凑近检查；接着盯着死者的眼睛做 <strong>Inland Empire</strong> 检定，成功的话会触发一段和死者的超现实对话；<strong>Reaction Speed</strong> 和 <strong>Physical Instrument</strong> 两项技能则开始质疑上吊的真实性；最后通过一次 <strong>白色 Perception</strong> 检定，尸检会进一步检查死者的口腔，发现喉咙后方有勒痕，颅骨里还嵌着一颗碎裂的子弹——上吊是伪造的，真正的死因是枪击。
+                </p>
+                <p style="font-size: 0.88rem; color: var(--gdd-muted); margin-top: 14px;">
+                    这个案例说明技能系统不是孤立的数值面板，而是被当成"侦探怎么破案"这件事本身的骨架来设计的：每一项技能对应一种具体的侦查手段，串起来就是一整套推理过程，玩家的加点选择因此变成了"我是哪种类型的侦探"这个问题的答案。
+                </p>
+            </div>
+        </div>
+
+        <!-- 2. 物质系统 -->
+        <div class="gdd-section">
+            <h2>二、物质系统：代价与能力</h2>
+            <p>游戏里有四种可用的物质——尼古丁、安非他明、酒精、pyrrolidone，全部被设计成"双刃剑"：短期内能强化某一项属性，但代价是消耗 Health（体力）或 Morale（精神）。而 Health 和 Morale 又直接和骰子检定的失败挂钩：判定失败会扣掉其中一项，任意一项归零游戏就结束。这就形成一个循环——玩家为了扛过一次关键判定去嗑药提升属性，代价却是让自己更接近崩溃的边缘。</p>
+
+            <div class="table-scroll">
+            <table class="simple-table">
+                <thead>
+                    <tr>
+                        <th style="width: 22%;">物质</th>
+                        <th style="width: 38%;">效果</th>
+                        <th style="width: 40%;">代价</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>尼古丁</strong></td><td>提升 Intellect（智力）</td><td>消耗 Health</td></tr>
+                    <tr><td><strong>酒精</strong></td><td>提升 Physique（体格）</td><td>消耗 Morale</td></tr>
+                    <tr><td><strong>安非他明 / pyrrolidone</strong></td><td>同样是临时增益某项属性</td><td>同样以消耗 Health 或 Morale 为代价</td></tr>
+                </tbody>
+            </table>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--gdd-muted);">主创 Robert Kurvitz 自己形容这套系统"是个多功能工具，给你更多的灵活度和角色扮演选项，但也会扭曲你的人格，而且完全不适合活过 30 岁"。用一句话说清了这套机制的意图：它不是单纯的增益道具，而是把"上瘾"这件事本身也变成了可以被玩家亲手体验、亲手计算代价的系统，而不是靠台词告诉你"主角有酗酒问题"。</p>
+        </div>
+
+        <!-- 3. 对话系统 -->
+        <div class="gdd-section">
+            <h2>三、对话系统：技能被写成会互相吵架的"内心声音"</h2>
+            <p>这是这款游戏里我印象最深的一个设计。技能不只是背景里默默判定成功率的数值，很多时候它们会直接以第一人称的身份跳出来，插一句话进对话框——像是主角脑子里同时住着好几个性格迥异的声音，各自有自己的立场，会互相反驳。审讯一个叫 Tommy 的角色、调查毒品交易线索时，玩家会同时看到这样几句插话：</p>
+
+            <div class="flow-diagram">
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <div class="flow-box-title">RHETORIC（修辞）</div>
+                        <div class="flow-desc">"等等。这家伙先说他们是朋友，然后又改口说只是'熟人'。而且他还乐意看着别人把她供出去？"</div>
+                    </div>
+                    <div class="flow-box">
+                        <div class="flow-box-title">EMPATHY（共情）</div>
+                        <div class="flow-desc">"逼 Tommy 说出来会伤透他的心，也会打垮他的精神。别指望你们还能是朋友。"</div>
+                    </div>
+                </div>
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <div class="flow-box-title">PHYSICAL INSTRUMENT（体能本能）</div>
+                        <div class="flow-desc">"现在不是讲感情的时候，你需要那个情报，孩子。"</div>
+                    </div>
+                    <div class="flow-box">
+                        <div class="flow-box-title">ELECTROCHEMISTRY（多巴胺）</div>
+                        <div class="flow-desc">"就在这儿了。答案就在*这儿*。你只需要问他。来吧——问啊！"</div>
+                    </div>
+                </div>
+            </div>
+
+            <p style="font-size: 0.9rem; color: var(--gdd-muted);">四种技能对同一件事给出了四种完全不同的解读，理性、共情、本能、冲动同时在打架，最后选哪句台词，才是玩家真正的态度。这个场景里玩家甚至可以动用警察身份逼 Tommy 交出卡车钥匙，代价是背叛他和朋友的信任——"当他盯着你的眼睛时，有什么东西碎掉了"。主创把这种通过对话造成的伤害称为"story-combat"（叙事式战斗）：没有回合制战斗系统，但对话本身可以造成和暴力等量的伤害。比起用一条好感度数值告诉玩家"你让他失望了"，这份伤害具体到NPC的眼神与状态, 对玩家更有冲击力。</p>
+        </div>
+
+        <!-- 4. 思想内阁 -->
+        <div class="gdd-section">
+            <h2>四、思想内阁：用时间塑造自我</h2>
+            <p>游戏里有一套叫"Thought Cabinet"（思想内阁）的系统：玩家在探索过程中会陆续解锁 53 种不同的"思想"，每一种都可以选择内化。但内化不是立即生效的——想法需要时间在脑子里"发酵"，直到某一刻发生"突破"，才会真正变成角色的一部分，并且往往是有得有失的。</p>
+
+            <div class="gdd-block">
+                <h4>例一：Advanced Race Theory（高级种族理论）</h4>
+                <p>接受这个想法会让主角变成一个种族主义者，作为交换，Rhetoric（修辞）技能的成长上限会提高——但代价是更容易被似是而非的歪理说服。</p>
+            </div>
+            <div class="gdd-block">
+                <h4>例二：Finger on the Eject Button（扳机上的手指）</h4>
+                <p>接受后 Authority（威严）和 Suggestion（暗示）会提升，但每天晚上都会冒出自杀的念头。更值得注意的是，这个负面想法本身不是随机出现的——只有当玩家自己已经在对话里表达过三次轻生的念头之后，它才会作为一个可选项解锁。也就是说，这个"变得更危险"的选择，是玩家自己一步步走出来的，而不是系统强加的。</p>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--gdd-muted);">这套系统是缓慢的意识塑造：自我的想法不是选了就立刻生效的开关，而是需要时间沉淀，而且经常没有纯粹的好坏，只有取舍。强调玩家角色的"性格"完全可以被设计成一个持续演化、有延迟反馈的过程，而不是一次性的初始设定。</p>
+        </div>
+
+        <!-- 5. 叙事亮点 -->
+        <div class="gdd-section">
+            <h2>五、叙事的动人之处</h2>
+            <p>机制之外，这款游戏在叙事层面也有两个我觉得很值得记下来的处理：</p>
+            <div class="gdd-block">
+                <h4>失忆是撬动身份建构的支点，不是噱头</h4>
+                <p>主角一睁眼就不知道自己是谁，这个"空白"反而给了玩家主动权——你不是在扮演一个已经写好性格的侦探，而是在一路收集线索的过程中，自己决定"我想成为什么样的警察"。失忆在这里不是悬疑钩子，而是让玩家从被动接受设定，变成主动参与角色塑造的机制入口。</p>
+            </div>
+            <div class="gdd-block">
+                <h4>创伤被放在两个尺度上同时讲</h4>
+                <p>一个是主角个人的创伤——酗酒、失恋、自我放逐；另一个是整座城市 Revachol 的创伤——战争、意识形态崩塌、经济衰败。两条线互相印证：主创 Rostov 形容这座城市的世界观脱胎于"苏联废墟上诞生的、军火交易与野蛮资本主义横行的后启示录"。个人的失序被放进更大的历史创伤里去理解，游戏因此没有停留在"一个人很惨"的层面，而是让人意识到很多个人的崩溃，其实是时代留下的裂痕。这份沉重也没有压垮整部作品——比如那只"传说中的岛屿怪兽"在结尾被问及人生意义时，认真地建议主角"如果它是片叶子，你可以把它放进嘴里嚼一嚼"，黑色幽默在最压抑的地方留出了一口呼吸的空间。</p>
+            </div>
+        </div>
+
+        <!-- 6. 玩家反馈 -->
+        <div class="gdd-section">
+            <h2>六、玩家的真实反馈</h2>
+            <p>光看设计意图容易自说自话，我在写论文时也翻了 Reddit 上玩家关于这款游戏的讨论，挑两条比较有代表性的：</p>
+            <blockquote class="excerpt">
+                <p class="en">"I think I just realized how close to home Disco's portrayal of depression hits for me... one of the first thoughts that ran through my mind was exactly 'I don't want to be this kind of animal anymore'."</p>
+                <p><span class="speaker">译：</span>"我才意识到这游戏对抑郁症的描写有多真实……我脑子里冒出来的第一个念头，跟主角那句'我不想再做这种动物了'一模一样。"（Reddit 用户 Seriathus，2022）</p>
+            </blockquote>
+            <blockquote class="excerpt">
+                <p class="en">"The author definitely has more than a superficial understanding of the psychology of alcoholism... Like 70% of this game felt like a personal attack to me."</p>
+                <p><span class="speaker">译：</span>"作者对酗酒心理的理解绝对不是表面功夫……这游戏大概七成的内容对我来说都像是在指着我说话。"（Reddit 匿名用户，2022）</p>
+            </blockquote>
+            <p style="font-size: 0.9rem; color: var(--gdd-muted);">这两条反馈说明这套设计真正触达了有相似经历的玩家，而不是停留在"卖惨"或者说教的层面。因此：好的游戏设计从来不是靠感人的台词来实现，而是让玩家亲手做一遍那些艰难的选择：检定失败、嗑药续命、逼朋友背叛，通过这些具体的行动，塑造自我，认识自我。</p>
+        </div>
+
+       
+
+    <footer>
+        <p>&copy; 2026 Mira. <a href="index.html">返回主页</a></p>
+    </footer>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Dream | Mira</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .article-header { padding: 100px 0 60px; text-align: center; border-bottom: 1px solid #e6e6e6; }
+        .article-title  { font-size: 3.5rem; font-family: var(--font-serif); margin-bottom: 20px; color: #1a1a1a; }
+        .article-meta   { color: #888; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 30px; }
+
+        .article-content { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        .article-section { margin-bottom: 60px; }
+
+        .article-section h2 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 25px; color: #1a1a1a; }
+        .article-section h3 { font-family: var(--font-sans); font-size: 1.15rem; font-weight: 700; margin: 30px 0 14px; color: #333; }
+        .article-section p  { margin-bottom: 20px; color: #555; font-size: 1.05rem; line-height: 1.85; }
+
+        /* ===== 统计数字网格 ===== */
+        .stats-grid  { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 40px 0;
+                       border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 30px 0; }
+        .stat-item   { text-align: center; }
+        .stat-number { font-family: var(--font-serif); font-size: 2.2rem; color: #1a1a1a; display: block; }
+        .stat-label  { font-size: 0.76rem; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* ===== 截图 ===== */
+        .screenshot-grid.single-focus { grid-template-columns: 1fr 1fr; gap: 24px; margin: 30px auto; }
+        .screenshot-item { border: 1px solid #e6e6e6; border-radius: 10px; overflow: hidden; background: #fff; }
+        .screenshot-item img, .screenshot-placeholder {
+            width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover;
+        }
+        .screenshot-placeholder {
+            background: #f3f2ee; display: flex; align-items: center; justify-content: center;
+            color: #aaa; font-size: 0.85rem; letter-spacing: 0.5px; text-align: center; padding: 20px;
+        }
+        .caption { padding: 16px 18px; border-top: 1px solid #f0f0f0; }
+        .caption strong { display: block; font-size: 0.95rem; color: #1a1a1a; margin-bottom: 6px; }
+        .caption p { margin: 0; font-size: 0.85rem; color: #666; line-height: 1.7; }
+
+        /* ===== 叙事结构卡片 ===== */
+        .mechanic-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 28px 0; }
+        .mechanic-card { border: 1px solid #ececec; border-radius: 6px; padding: 22px 20px; }
+        .mechanic-card h4 { font-family: var(--font-sans); font-weight: 700; font-size: 0.98rem; color: #1a1a1a; margin-bottom: 8px; }
+        .mechanic-card p { font-size: 0.88rem; color: #666; line-height: 1.7; margin: 0; }
+
+        /* ===== 结局卡片 ===== */
+        .ending-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 30px 0; }
+        .ending-card { border: 1px solid #e6e6e6; border-radius: 6px; padding: 24px 22px; position: relative; }
+        .ending-card h4 { font-family: var(--font-serif); font-size: 1.15rem; color: #1a1a1a; margin-bottom: 8px; }
+        .ending-card p  { font-size: 0.9rem; color: #777; line-height: 1.7; margin: 0; }
+        .ending-tag { display: inline-block; font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase;
+            padding: 2px 10px; border-radius: 20px; margin-bottom: 10px; font-weight: 700; }
+        .tag-wake  { background: #edf1f6; color: #4a6a9a; }
+        .tag-stay  { background: #fef3e2; color: #c87d20; }
+
+        /* ===== 角色表格 ===== */
+        .character-table { width: 100%; border-collapse: collapse; font-size: 0.93rem; margin: 20px 0; }
+        .character-table th { background: #fafafa; border-bottom: 2px solid #e6e6e6; padding: 12px 14px;
+            text-align: left; font-weight: 700; color: #333; letter-spacing: 0.5px; }
+        .character-table td { padding: 12px 14px; border-bottom: 1px solid #f0f0f0; color: #555; vertical-align: top; line-height: 1.65; }
+        .character-table tr:last-child td { border-bottom: none; }
+        .char-role { display: inline-block; font-size: 0.72rem; background: #f5f3ef; color: #888;
+            padding: 1px 8px; border-radius: 3px; letter-spacing: 0.5px; }
+
+        /* ===== 数据高亮 / 制作说明 ===== */
+        .data-highlight { background: #fafaf8; border-left: 3px solid #d4cdbd; padding: 20px 24px; border-radius: 0 4px 4px 0; margin: 24px 0; }
+        .data-highlight p { margin: 0; font-size: 0.95rem; color: #555; line-height: 1.75; }
+        .data-highlight strong { color: #333; }
+
+        blockquote.excerpt { margin: 16px 0; padding: 10px 0 10px 16px; border-left: 2px solid #d4cdbd;
+            font-family: var(--font-serif); font-style: italic; font-size: 1rem; color: #555; }
+        blockquote.excerpt span { display: block; font-family: var(--font-sans); font-style: normal;
+            font-size: 0.78rem; color: #999; margin-top: 6px; letter-spacing: 0.5px; }
+
+        @media (max-width: 768px) {
+            .article-title { font-size: 2.4rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+            .mechanic-grid, .ending-grid, .screenshot-grid.single-focus { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 导航 -->
+    <nav>
+        <div class="logo"><a href="index.html">MIRA.</a></div>
+        <div class="menu">
+            <a href="index.html" data-en="← Back to Home" data-zh="← 返回主页">← Back to Home</a>
+            <button class="lang-toggle" id="langToggle" aria-label="Switch language">中文</button>
+        </div>
+    </nav>
+
+    <!-- 文章头部 -->
+    <header class="article-header">
+        <div class="article-meta"
+             data-en="Interactive Fiction · Branching Narrative · Solo Writer & Developer · 2025"
+             data-zh="互动小说 · 分支叙事 · 独立编剧与开发 · 2025">
+            Interactive Fiction · Branching Narrative · Solo Writer & Developer · 2025
+        </div>
+
+        <h1 class="article-title">Beautiful Dream</h1>
+
+        <p style="max-width: 640px; margin: 0 auto; color: #666; font-size: 1.05rem; line-height: 1.8;"
+           data-en="A short Ren'Py time-loop story: a graduate student wakes up back in her March 2015 middle-school classroom, and must decide whether to return to the present — or stay."
+           data-zh="一部短篇 Ren'Py 时空穿越故事：你穿越回 2015 年 3 月的初中教室，必须决定是回到现实，还是留在过去。">
+            A short Ren'Py time-loop story: a graduate student wakes up back in her March 2015 middle-school classroom, and must decide whether to return to the present — or stay.
+        </p>
+
+        <div class="skills-bar" style="border:none; margin-top: 30px; justify-content: center; display: flex; flex-wrap: wrap; gap: 10px;">
+            <span class="skill-item" data-en="Narrative Design" data-zh="叙事设计">Narrative Design</span>
+            <span class="skill-item" data-en="Branching Dialogue" data-zh="分支对话设计">Branching Dialogue</span>
+            <span class="skill-item" data-en="Character Writing" data-zh="角色塑造">Character Writing</span>
+            <span class="skill-item">Ren'Py / Python</span>
+            
+        </div>
+    </header>
+
+    <!-- 正文 -->
+    <article class="article-content">
+
+        <!-- ① 项目概览 -->
+        <div class="article-section">
+            <h2 data-en="Project Overview" data-zh="项目概览">Project Overview</h2>
+            <p data-en="Beautiful Dream is a short, dialogue-driven visual novel written and built solo. The protagonist — a graduate student deep in thesis work in 2025 — suddenly wakes up in her old middle-school classroom on an ordinary afternoon in March 2015. Is it a dream, a parallel universe, or real time travel? The game never answers the question directly; instead, it lets the player sit inside the ambiguity, reconnecting with old classmates Anna and Louis and deciding how much of that lost time is worth revisiting."
+               data-zh="《Beautiful Dream》是一部短篇、以对话驱动的独立视觉小说。主角是2025年的学生，某天突然在 2015 年 3 月的一个平常午后醒来，发现自己回到了初中教室。这究竟是一场梦、一个平行宇宙，还是真实的时空穿越？游戏并不直接给出答案，而是让玩家停留在这种不确定性之中，与老同学 Anna 和 Louis 重新相遇，并决定这段过去的时光值不值得再走一遍。">
+                <em>Beautiful Dream</em> is a short, dialogue-driven visual novel written and built solo. The protagonist — a graduate student deep in thesis work in 2025 — suddenly wakes up in her old middle-school classroom on an ordinary afternoon in March 2015. Is it a dream, a parallel universe, or real time travel? The game never answers the question directly; instead, it lets the player sit inside the ambiguity, reconnecting with old classmates Anna and Louis and deciding how much of that lost time is worth revisiting.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label" data-en="Endings" data-zh="结局数量">Endings</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label" data-en="Main Characters" data-zh="核心角色">Main Characters</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">~540</span>
+                    <span class="stat-label" data-en="Script Lines" data-zh="脚本行数">Script Lines</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1</span>
+                    <span class="stat-label" data-en="Dev, Solo" data-zh="独立完成">Dev, Solo</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ② 截图 -->
+        <div class="article-section">
+            <h2 data-en="Game Screenshots" data-zh="游戏截图展示">Game Screenshots</h2>
+            
+            <div class="screenshot-grid single-focus">
+                <div class="screenshot-item">
+                    <div class="caption">
+                        <strong data-en="Opening Scene" data-zh="开场画面">Opening Scene</strong>
+                        <img src="assets/game/pic1.png" alt="Opening scene — waking up in the 2015 classroom">
+                        <p data-en="The protagonist wakes up disoriented in her old classroom, greeted by classmate Anna."
+                           data-zh="主角在旧教室中迷茫醒来，被同学 Anna 唤醒。">
+                            The protagonist wakes up disoriented in her old classroom, greeted by classmate Anna.
+                        </p>
+                    </div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/game/pic2.png" alt="Reality VS Dream">
+                    <div class="caption">
+                        <strong data-en="The Final Choice" data-zh="自我对话">Talk with yourself</strong>
+                        <p data-en="It's real,or it's a dream? You talk with your younger self, deciding whether to return to the present or stay."
+                           data-zh="你与年轻的自我对话，思考是现实还是梦境。">
+                            你与年轻的自我对话，思考是现实还是梦境
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ③ 叙事结构：漏斗式分支 -->
+        <div class="article-section">
+            <h2 data-en="Narrative Structure: Funnel Branching" data-zh="叙事结构：漏斗式分支">Narrative Structure: Funnel Branching</h2>
+            <p data-en="For a solo-written short like this, letting every choice fork the script would have blown the writing budget fast. So most early choices are deliberately 'flavor' choices — they change the immediate line of dialogue and let the player feel agency, then funnel back into the same downstream scene. Only one choice near the end is a true structural fork with two fully separate endings."
+               data-zh="对于一人独立编剧的短篇作品来说，如果每个选择都真正分岔剧本，写作量会层级上升。所以大部分前期选择是刻意设计的操控式选择，只能改变当下的台词、让玩家感受到自主权，但最终都会收束回同一条后续剧情。只有临近结尾的一次选择，才是真正意义上的结构性分岔，通向两个完全独立的结局。">
+                For a solo-written short like this, letting every choice fork the script would have blown the writing budget fast. So most early choices are deliberately "flavor" choices — they change the immediate line of dialogue and let the player feel agency, then funnel back into the same downstream scene. Only one choice near the end is a true structural fork with two fully separate endings.
+            </p>
+
+            <div class="mechanic-grid">
+                <div class="mechanic-card">
+                    <h4 data-en="Flavor Choices (Converging)" data-zh="风味选择（收束型）">Flavor Choices (Converging)</h4>
+                    <p data-en="'Where am I?' / 'Who are you?' / 'What happened?' all lead to the same next scene with slightly different framing lines. Same pattern repeats for 'check the notebook' vs. 'look around the room', and 'go to campus' vs. 'stay in the classroom'."
+                       data-zh="'我在哪？'/'你是谁？'/'发生了什么？'三个开场选项最终都通向同一个后续场景，只是引导台词不同。'翻看笔记本' vs '环顾教室'、'去校园走走' vs '留在教室'也是同样的收束结构。">
+                        "Where am I?" / "Who are you?" / "What happened?" all lead to the same next scene with slightly different framing lines. Same pattern repeats for "check the notebook" vs. "look around the room", and "go to campus" vs. "stay in the classroom".
+                    </p>
+                </div>
+                <div class="mechanic-card">
+                    <h4 data-en="The One Real Fork" data-zh="唯一的真实分岔">The One Real Fork</h4>
+                    <p data-en="After a full afternoon with Anna and Louis, a stranger's voice asks directly: wake up to real 2025, or stay in 2015 a while longer. This is the only choice that leads to two independently written endings."
+                       data-zh="在与 Anna、Louis 度过完整的一个下午后，一个陌生的声音直接发问：醒来回到真实的 2025，还是在 2015 多留一会儿。这是唯一一个通向两条独立结局剧本的选择。">
+                        After a full afternoon with Anna and Louis, a stranger's voice asks directly: wake up to real 2025, or stay in 2015 a while longer. This is the only choice that leads to two independently written endings.
+                    </p>
+                </div>
+            </div>
+
+            <div class="data-highlight">
+                <p data-en="&lt;strong&gt;Design intent:&lt;/strong&gt; concentrate all writing effort on making the single meaningful choice feel earned — the whole afternoon with Anna and Louis is essentially a long, carefully paced set-up for the one question that matters at the end."
+                   data-zh="&lt;strong&gt;设计意图：&lt;/strong&gt;把全部写作精力集中在让那一个真正重要的选择显得'水到渠成'——与 Anna、Louis 相处的整个下午，本质上都是为结尾那一个真正重要的问题做的长线铺垫。">
+                    <strong>Design intent:</strong> concentrate all writing effort on making the single meaningful choice feel earned — the whole afternoon with Anna and Louis is essentially a long, carefully paced set-up for the one question that matters at the end.
+                </p>
+            </div>
+        </div>
+
+        <!-- ④ 双结局 -->
+        <div class="article-section">
+            <h2 data-en="Two Endings, One Mirrored Scene" data-zh="两个结局，一场镜像戏">Two Endings, One Mirrored Scene</h2>
+            <p data-en="Both endings share the same device — the protagonist comes face to face with her 15-year-old self — but resolve it in opposite emotional directions."
+               data-zh="两个结局共用同一个叙事装置——主角与 15 岁的自己面对面——但走向了两种截然不同的情感结局。">
+                Both endings share the same device — the protagonist comes face to face with her 15-year-old self — but resolve it in opposite emotional directions.
+            </p>
+
+            <div class="ending-grid">
+                <div class="ending-card">
+                    <span class="ending-tag tag-wake" data-en="Ending 1" data-zh="结局一">Ending 1</span>
+                    <h4 data-en="Wake Up" data-zh="醒来">Wake Up</h4>
+                    <p data-en="The protagonist chooses to return to 2025. Her younger self says goodbye and lets her go: 'Goodbye, we all move on.' She wakes up at her desk — only twenty minutes have passed — and resolves to keep moving forward despite present-day hardship."
+                       data-zh="主角选择回到 2025。年幼的自己道别放手：'再见，我们都要向前走。'她在书桌前醒来——原来只过了二十分钟——并下定决心，无论现实多艰难都要继续前行。">
+                        The protagonist chooses to return to 2025. Her younger self says goodbye and lets her go: <em>"Goodbye, we all move on."</em> She wakes up at her desk — only twenty minutes have passed — and resolves to keep moving forward despite present-day hardship.
+                    </p>
+                </div>
+                <div class="ending-card">
+                    <span class="ending-tag tag-stay" data-en="Ending 2" data-zh="结局二">Ending 2</span>
+                    <h4 data-en="Stay in the Past" data-zh="留在过去">Stay in the Past</h4>
+                    <p data-en="The protagonist chooses to remain in 2015. This time it's her older self who fades away, wished well by her younger self: 'I wish you all the best, bye.' She reopens her eyes in math class, no longer bored by it — aware she now carries the chance to take a different path."
+                       data-zh="主角选择留在 2015。这一次，消失的是年长的自己，被年幼的自己道别祝福：'祝你一切顺利，再见。'她在数学课上重新睁开眼，不再感到枯燥——因为她知道，自己拥有了走上另一条路的机会。">
+                        The protagonist chooses to remain in 2015. This time it's her <em>older</em> self who fades away, wished well by her younger self: <em>"I wish you all the best, bye."</em> She reopens her eyes in math class, no longer bored by it — aware she now carries the chance to take a different path.
+                    </p>
+                </div>
+            </div>
+
+            <blockquote class="excerpt">
+                "The past is soft and familiar — but you don't belong there anymore. So tell me — will you return, or will you remain?"
+                <span data-en="— the stranger, moments before the final choice" data-zh="——陌生人，最终抉择前一刻的发问">— the stranger, moments before the final choice</span>
+            </blockquote>
+        </div>
+
+        <!-- ⑤ 角色设计 -->
+        <div class="article-section">
+            <h2 data-en="Character Design" data-zh="角色设计">Character Design</h2>
+            <p data-en="With only two recurring characters, each had to carry distinct symbolic weight rather than just filling narrative slots."
+               data-zh="全篇只有两位常驻角色，每一个都需要承担明确的象征意义，而不只是填补叙事位置。">
+                With only two recurring characters, each had to carry distinct symbolic weight rather than just filling narrative slots.
+            </p>
+            <table class="character-table">
+                <thead>
+                    <tr>
+                        <th data-en="Character" data-zh="角色">Character</th>
+                        <th data-en="Role" data-zh="身份">Role</th>
+                        <th data-en="Narrative Function" data-zh="叙事功能">Narrative Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Anna</strong></td>
+                        <td><span class="char-role" data-en="Classmate" data-zh="同学">Classmate</span></td>
+                        <td data-en="Introduced reading Hesse's 'Demian' — a novel about self-discovery. The protagonist calls her 'my Demian', casting Anna as a quiet spiritual guide rather than a simple friend."
+                            data-zh="出场时正在读黑塞的《德米安》——一部关于自我发现的小说。主角称她为'我的德米安'，将 Anna 塑造成一位安静的精神引路人，而非单纯的朋友角色。">
+                            Introduced reading Hesse's <em>Demian</em> — a novel about self-discovery. The protagonist calls her "my Demian", casting Anna as a quiet spiritual guide rather than a simple friend.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Louis</strong></td>
+                        <td><span class="char-role" data-en="Best Friend" data-zh="挚友">Best Friend</span></td>
+                        <td data-en="Carefree and grounded in the present moment ('look at how beautiful the sunset is'). Represents the friendships that quietly drift apart after school ends — the protagonist already knows, mid-scene, that they will lose touch."
+                            data-zh="洒脱、活在当下（'看外面的夕阳多美'）。代表着毕业后悄然疏远的友谊——主角在场景进行中就已经知道，两人日后会渐渐失去联系。">
+                            Carefree and grounded in the present moment ("look at how beautiful the sunset is"). Represents the friendships that quietly drift apart after school ends — the protagonist already knows, mid-scene, that they will lose touch.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong data-en="You (2015)" data-zh="15岁的你">You (2015)</strong></td>
+                        <td><span class="char-role" data-en="Younger Self" data-zh="年少的自己">Younger Self</span></td>
+                        <td data-en="Appears only in the two endings' closing scenes — a device to externalise the protagonist's internal negotiation between nostalgia and moving forward."
+                            data-zh="只在两个结局的收尾场景中登场——是一个把'怀旧'与'向前走'这场内心谈判外化出来的叙事装置。">
+                            Appears only in the two endings' closing scenes — a device to externalise the protagonist's internal negotiation between nostalgia and moving forward.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ⑥ 制作说明 -->
+        <div class="article-section">
+            <h2 data-en="Production Notes" data-zh="制作说明">Production Notes</h2>
+            <p data-en="Built solo in Ren'Py, using CC BY 4.0-licensed music, character sprites, and backgrounds from independent creators, with full attribution credited in-game — a small but deliberate habit of treating third-party assets as a compliance responsibility, not an afterthought."
+               data-zh="独立使用 Ren'Py 完成开发，音乐、角色立绘与背景均采用独立创作者发布的 CC BY 4.0 授权素材，并在游戏内附完整署名。">
+                Built solo in Ren'Py, using CC BY 4.0-licensed music, character sprites, and backgrounds from independent creators, with full attribution credited in-game — a small but deliberate habit of treating third-party assets as a compliance responsibility, not an afterthought.
+            </p>
+        </div>
+
+        <!-- Demo 体验 -->
+        <div class="gdd-section" style="text-align: center;">
+            <h3 style="margin-bottom: 8px;">Demo 试玩与源码查看</h3>
+            <p style="font-size: 0.9rem; color: #888;">
+                完整 Demo 已发布至 Itch.io，欢迎体验游戏实操与交互细节：
+            </p>
+            <a href="https://mirahq.itch.io/beautiful-dream" target="_blank" class="demo-cta">前往 Itch.io 体验 Demo →</a>
+        </div>
+    </article>
+
+    <footer>
+        <p>&copy; 2026 Mira.
+            <a href="index.html" data-en="Back to Home" data-zh="返回主页">Back to Home</a>
+        </p>
+    </footer>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

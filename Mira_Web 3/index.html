@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mira | Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* 语言切换按钮样式 */
+        .lang-toggle {
+            background: none;
+            border: 1px solid #1a1a1a;
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            color: #1a1a1a;
+            transition: all 0.2s ease;
+            margin-left: 20px;
+            white-space: nowrap;
+        }
+        .lang-toggle:hover {
+            background: #1a1a1a;
+            color: #fff;
+        }
+        /* 让导航支持按钮对齐 */
+        nav .menu {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 导航栏 -->
+        <nav>
+            <div class="logo">MIRA.</div>
+            <div class="menu">
+                <a href="#design"   data-en="Design"   data-zh="项目">Projects</a>
+                <a href="#data"    data-en="Data"    data-zh="数据">Data</a>
+                
+                <a href="#about"   data-en="About"   data-zh="关于">About</a>
+                <a href="#cv"      data-en="Resume"  data-zh="简历">Resume</a>
+                <button class="lang-toggle" id="langToggle" aria-label="Switch language">中文</button>
+            </div>
+        </nav>
+
+        <!-- 01. Intro (Header) -->
+        <header>
+            <div class="header-layout">
+                <div class="hero-text fade-in">
+                    <span class="greeting"
+                        data-en="Product / Game Interaction Design"
+                        data-zh="产品 / 游戏交互设计">
+                        Product Design / Game Interaction Design`
+                    </span>
+                    <h1
+                        data-en="Building logic <br> with <em>artistic</em> soul."
+                        data-zh="用<em>艺术</em>思维，<br>构建数据和产品。">
+                        Building logic <br> with <em>artistic</em> soul.
+                    </h1>
+                    <p class="hero-desc"
+                        data-en="Transitioning from Literature to Digital Humanities, I explore how code can reshape narratives. I believe digital media are not just tools, but cultural landscapes where abstract ideas become tangible, interactive experiences."
+                        data-zh="我相信数字媒介不只是工具，而是将抽象的思想变成可感知、可交互的体验。">
+                        I believe digital media are not just tools, but cultural landscapes where abstract ideas become tangible, interactive experiences.Focusing on AI-driven user experience design, this study explores the application of large-scale models in emotion expression, content generation, and interactive products.
+                    </p>
+                    
+                    <div class="social-links">
+                        <a href="mailto:mirablue177@gmail.com">Email: mirablue177@gmail.com</a>
+                        <br></br>
+                        <a href="https://mirahq.itch.io/" target="_blank">Itch.io</a>
+                        <span class="separator">/</span>
+                        <a href="https://www.instagram.com/mira_ismiracle017/" target="_blank">Instagram</a>
+                        <span class="separator">/</span>
+                        <a href="https://github.com/mirablues" target="_blank">GitHub</a>
+                    </div>
+                </div>
+                
+                <div class="hero-image-wrapper fade-in">
+                    <img src="assets/images/mira.JPG" alt="Mira Profile">
+                </div>
+            </div>
+        </header>
+
+         <!-- 02. Interactive Design -->
+        <section id="design">
+            <h2 class="section-title fade-in"
+                data-en="Interactive Design"
+                data-zh="产品设计">Interactive Design</h2>
+            <div class="game-grid">
+                <div class="game-card fade-in" onclick="window.location.href='web.html'">
+                    <h3 data-en="Fill Your Heart" data-zh="Fill Your Heart">Fill Your Heart</h3>
+                    <p data-en="A minimalist infinite runner. Focus on game feel and procedural generation algorithms."
+                       data-zh="一款探索东亚文化创伤的互动叙事游戏，追溯中国千禧一代从童年到成年的内心成长历程。">An interactive narrative game that explores cultural trauma in East Asia, tracing the inner growth of China's millennial generation from childhood to adulthood.</p>
+                    <a href="web.html" class="play-link"
+                       data-en="Project Details" data-zh="详细内容">项目介绍</a>
+                </div>
+                
+                <div class="game-card fade-in" onclick="window.location.href='beautiful-dream.html'">
+                    <h3 data-en="Beautiful Dream" data-zh="Beautiful Dream">Beautiful Dream</h3>
+                    <p data-en="A short Ren'Py time-loop visual novel — waking up back in a 2015 middle-school classroom, and choosing whether to return to the present or stay."
+                       data-zh="一部短篇 Ren'Py 时空穿越视觉小说——穿越回 2015 年的初中教室，抉择是回到现实，还是留在过去。">A short Ren'Py time-loop visual novel — waking up back in a 2015 middle-school classroom, and choosing whether to return to the present or stay.</p>
+                    <a href="beautiful-dream.html" class="play-link"
+                       data-en="Project Details" data-zh="详细内容">项目介绍</a>
+                </div>
+                <div class="game-card fade-in" onclick="window.location.href='disco-elysium-analysis.html'">
+                    <h3 data-en="Disco Elysium: A Design Teardown" data-zh="极乐迪斯科：机制拆解与分析">Disco Elysium: A Design Teardown</h3>
+                    <p data-en="A design teardown of Disco Elysium's skill checks, substance system, personified dialogue, and Thought Cabinet — from a game design perspective."
+                       data-zh="从策划视角拆解《极乐迪斯科》的技能检定、物质系统、人格化对话与思想内阁，看它如何用系统语言表达心理健康议题。">A design teardown of Disco Elysium's skill checks, substance system, personified dialogue, and Thought Cabinet — from a game design perspective.</p>
+                    <a href="disco-elysium-analysis.html" class="play-link"
+                       data-en="Project Details" data-zh="详细内容">项目介绍</a>
+                </div>
+                <div class="game-card fade-in" onclick="window.location.href='app.html'">
+                    <h3 data-en="Personal Diary" data-zh="个人心情日记">Personal Diary</h3>
+                    <p data-en="A mind-body companion app that records your current mood changes, receives feedback and responses from the universe, and thus heals yourself."
+                       data-zh="一个心灵陪伴应用，记录当下心情变化，获得宇宙的反馈和回应，从而疗愈自我。">A mind-body companion app that records your current mood changes, receives feedback and responses from the universe, and thus heals yourself.</p>
+                    <a href="app.html" class="play-link"
+                       data-en="Project Details" data-zh="详细内容">项目介绍</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03. Data Project -->
+        <section id="data">
+            <h2 class="section-title fade-in"
+                data-en="Data Project"
+                data-zh="数据项目">Data Project</h2>
+            <div class="project-list">
+                <a href="project-alberta-map.html" class="project-item fade-in">
+                    <div class="project-left">
+                        <h3 data-en="Alberta Temperature Map"
+                            data-zh="阿尔伯塔气温分布图">Alberta Temperature Map</h3>
+                        <p data-en="Interactive Leaflet map of 83 weather stations — January 2026 climate data"
+                        data-zh="83 个气象站的交互式 Leaflet 地图 — 2026年1月气候数据">Interactive Leaflet map of 83 weather stations — January 2026 climate data</p>
+                    </div>
+                    <div class="project-right">R / Leaflet</div>
+                </a>
+                <a href="project-bechdel.html" class="project-item fade-in">
+                    <div class="project-left">
+                        <h3 data-en="The Bechdel Test Analysis"
+                            data-zh="贝克德尔测试分析">The Bechdel Test Analysis</h3>
+                        <p data-en="SQL analysis of gender representation in 1,794 films"
+                           data-zh="基于 SQL 的 1,794 部电影性别呈现分析">SQL analysis of gender representation in 1,794 films</p>
+                    </div>
+                    <div class="project-right">SQL / Data Engineering</div>
+                </a>
+
+                <a href="project-film.html" class="project-item fade-in">
+                    <div class="project-left">
+                        <h3 data-en="Global Film Industry: Multi-Dimensional Analysis"
+                            data-zh="全球电影产业：多维度可视化分析">Global Film Industry: Multi-Dimensional Analysis</h3>
+                        <p data-en="7,668 films × bar, heatmap, scatter, lollipop charts + Gephi network"
+                            data-zh="7,668 部影片 × 条形图、热力图、散点图、棒棒糖图 + Gephi 网络图">7,668 films × bar, heatmap, scatter, lollipop charts + Gephi network</p>
+                    </div>
+                    <div class="project-right">R / Python / Gephi</div>
+                </a>
+                
+                <a href="project-nlp.html" class="project-item fade-in">
+                    <div class="project-left">
+                        <h3 data-en="NLP Text Analysis Pipeline"
+                            data-zh="NLP 文本分析流水线">NLP Text Analysis Pipeline</h3>
+                        <p data-en="Computational analysis of cultural texts using Python &amp; NLTK"
+                           data-zh="使用 Python 与 NLTK 对文化文本进行计算分析">Computational analysis of cultural texts using Python &amp; NLTK</p>
+                    </div>
+                    <div class="project-right">Python / NLP</div>
+                </a>
+                
+                
+            </div>
+        </section>
+
+       
+       
+
+
+        <!-- 06. About Me -->
+        <section id="about" style="padding: 80px 0; border-top: 1px solid #eee;">
+            <h2 class="section-title fade-in"
+                data-en="About Mira"
+                data-zh="关于我">About Me</h2>
+            
+            <div class="bio-container fade-in" style="display: flex; gap: 60px; flex-wrap: wrap; margin-top: 40px;">
+                <div style="flex: 1.2; min-width: 300px;">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; line-height: 1.3; margin-bottom: 30px; color: #1a1a1a;"
+                        data-en='"Technology gives us power.<br> I want to use it to create <span style=\"font-style:italic; color:#555;\">meaning</span>."'
+                        data-zh='"技术赋予我们力量。<br>我想用它创造<span style=\"font-style:italic; color:#555;\">意义</span>。"'>
+                        "Technology gives us power.<br> I want to use it to create <span style="font-style:italic; color:#555;">meaning</span>."
+                    </h3>
+                    <p style="color: #555; line-height: 1.8; font-size: 1.05rem;"
+                       data-en="Central to my work are the themes of journey, choice, and direction. I don't just write code; I build vessels for meaning—making the invisible internal world visible through digital interaction."
+                       data-zh="旅程、选择与方向是我作品的核心主题。我不只是写代码，我在构建承载意义的容器——通过数字交互，让隐藏的内心世界变得可见。">
+                        Central to my work are the themes of journey, choice, and direction. I don't just write code; I build vessels for meaning—making the invisible internal world visible through digital interaction.
+                    </p>
+                </div>
+
+                <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 30px;">
+                    <div class="bio-item">
+                        <h4 style="font-weight: 700; font-size: 1.1rem; margin-bottom: 10px;"
+                            data-en=" From Text to Tech"
+                            data-zh=" 从文字到技术"> From Text to Tech</h4>
+                        <p style="font-size: 0.95rem; color: #666; line-height: 1.6;"
+                           data-en="Transitioning from Literature to Programming revealed a truth: code is a language of construction. It transforms abstract stories into 3D experiences."
+                           data-zh="从文学转向编程，我意识到，代码是一种建构的语言，它将抽象的故事转化为立体的体验。">
+                            Transitioning from Literature to Programming revealed a truth: code is a language of construction. It transforms abstract stories into 3D experiences.
+                        </p>
+                    </div>
+                    <div class="bio-item">
+                        <h4 style="font-weight: 700; font-size: 1.1rem; margin-bottom: 10px;"
+                            data-en=" Philosophy"
+                            data-zh=" 创作理念"> Philosophy</h4>
+                        <p style="font-size: 0.95rem; color: #666; line-height: 1.6;"
+                           data-en="I approach games not as mere entertainment, but as cultural landscapes where users can explore choices and consequences."
+                           data-zh="数字交互产品是一种文化景观。我关注用户如何在交互过程中形成情绪反馈与行为决策，并尝试通过 AI 驱动的系统设计增强沉浸感与长期体验价值。。">
+                            I approach games not as mere entertainment, but as cultural landscapes.I focus on how users generate emotional feedback and make behavioral decisions during the interaction process, and I try to enhance the immersion and long-term experience value through AI-driven system design.
+                        </p>
+                    </div>
+                    <div class="bio-item">
+                        <h4 style="font-weight: 700; font-size: 1.1rem; margin-bottom: 10px;"
+                            data-en=" Goal"
+                            data-zh=" 目标"> Goal</h4>
+                        <p style="font-size: 0.95rem; color: #666; line-height: 1.6;"
+                           data-en="To create digital spaces that feel human—offering connection, warmth, and a moment of recognition."
+                           data-zh="创造有温度的数字空间——给人以连结感、温暖，以及被看见的瞬间。">
+                            To create digital spaces that feel human—offering connection, warmth, and a moment of recognition.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07. Experience (CV) -->
+        <section id="cv">
+            <h2 class="section-title fade-in"
+                data-en="Experience | Skills"
+                data-zh="经历 | 技能">Experience | Skills</h2>
+            
+            <div class="skills-container fade-in">
+                <div class="skill-row">
+                    <span class="skill-category"
+                          data-en="Development"
+                          data-zh="开发">Development</span>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">LLM</span>
+                        <span class="skill-tag">JavaScript/HTML/CSS</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-category"
+                          data-en="Data Science"
+                          data-zh="数据科学">Data Science</span>
+                    <div class="skill-tags">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">R Language</span>
+                        <span class="skill-tag">Data Visualization</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-category"
+                          data-en="Creative Works"
+                          data-zh="创意作品">Creative Works</span>
+                    <div class="skill-tags">
+                        <span class="skill-tag"
+                              data-en="Game Design" data-zh="游戏设计">Game Design</span>
+                        <span class="skill-tag"
+                              data-en="Video Editing" data-zh="视频剪辑">Video Editing</span>
+                        <span class="skill-tag"
+                              data-en="AI Project Design" data-zh="AI产品设计">AI Project Design</span>
+                        <span class="skill-tag"
+                              data-en="User Experience & Behavior Analysis" data-zh="用户体验与行为分析">User Experience & Behavior Analysis</span>
+                        <span class="skill-tag"
+                              data-en="Project Planning" data-zh="产品规划">Project Planning</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-row fade-in">
+                <div class="cv-year">2024 — Present</div>
+                <div class="cv-content">
+                    <h4 data-en="AI Model Evaluator &amp; RLHF Specialist"
+                        data-zh="AI 模型评估员 &amp; RLHF 专员">AI Model Evaluator &amp; RLHF Specialist</h4>
+                    <span>Remote Contract (Outlier AI)</span>
+                    <p data-en="Specializing in <strong>Reinforcement Learning from Human Feedback (RLHF)</strong>. I evaluate and fine-tune LLM outputs for coding logic (Python/SQL) and narrative coherence, applying linguistic expertise to bridge the gap between human intent and machine generation."
+                       data-zh="专注于<strong>基于人类反馈的强化学习（RLHF）</strong>。评估与微调大型语言模型在编程逻辑（Python/SQL）和叙事连贯性方面的输出，运用语言学专业知识弥合人类意图与机器生成之间的差距。">
+                        Specializing in <strong>Reinforcement Learning from Human Feedback (RLHF)</strong>. 
+                        I evaluate and fine-tune LLM outputs for coding logic (Python/SQL) and narrative coherence, applying linguistic expertise to bridge the gap between human intent and machine generation.
+                    </p>
+                </div>
+            </div>
+
+            <div class="cv-row fade-in">
+                <div class="cv-year">2025 — Present</div>
+                <div class="cv-content">
+                    <h4 data-en="Independent Game Developer"
+                        data-zh="独立游戏开发者">Independent Game Developer</h4>
+                    <span data-en="Indie Studio / Personal Projects"
+                          data-zh="独立工作室 / 个人项目">Indie Studio / Personal Projects</span>
+                    <p data-en="Designed and developed interactive games using <strong>Ren'py</strong>. Created projects, handling the full development cycle from system architecture and gameplay algorithms to UI design and visual storytelling."
+                       data-zh="使用 <strong>Ren'py-python语言</strong> 设计并开发互动游戏。主导游戏项目的完整开发周期，涵盖系统架构、玩法算法、UI 设计到视觉叙事。">
+                        Designed and developed interactive games using <strong>Ren'py</strong>. 
+                        Created projects, handling the full development cycle from system architecture and gameplay algorithms to UI design and visual storytelling.
+                    </p>
+                </div>
+            </div>
+
+            <div class="cv-row fade-in">
+                <div class="cv-year">2024 — Present</div>
+                <div class="cv-content">
+                    <h4 data-en="Freelance Web Designer &amp; Developer"
+                        data-zh="自由网页设计师 &amp; 开发者">Freelance Web Designer &amp; Developer</h4>
+                    <span data-en="Self-Employed" data-zh="自由职业">Self-Employed</span>
+                    <p data-en="Building responsive, aesthetic portfolios and landing pages using <strong>HTML5, CSS3, and JavaScript</strong>. Focusing on minimalist design philosophy, semantic coding, and creating fluid user experiences for creative professionals."
+                       data-zh="使用 <strong>HTML5、CSS3 和 JavaScript</strong> 构建响应式、具有美学品味的作品集网站与落地页。专注极简设计哲学、语义化编码，为创意从业者打造流畅的用户体验。">
+                        Building responsive, aesthetic portfolios and landing pages using <strong>HTML5, CSS3, and JavaScript</strong>. 
+                        Focusing on minimalist design philosophy, semantic coding, and creating fluid user experiences for creative professionals.
+                    </p>
+                </div>
+            </div>
+
+            <div style="width: 100%; height: 1px; background: #eee; margin: 50px 0;"></div>
+
+            <h3 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 30px; font-weight: 400; color: #1a1a1a;"
+                data-en="Education" data-zh="教育背景">Education</h3>
+
+            <div class="cv-row fade-in">
+                <div class="cv-year">2024 — 2026</div>
+                <div class="cv-content">
+                    <h4 data-en="Master of Arts in Digital Humanities"
+                        data-zh="数字人文硕士">Master of Arts in Digital Humanities</h4>
+                    <span data-en="University of Alberta, Canada"
+                          data-zh="阿尔伯塔大学，加拿大">University of Alberta, Canada</span>
+                  
+                </div>
+            </div>
+            <div class="cv-row fade-in">
+                <div class="cv-year">2020 — 2024</div>
+                <div class="cv-content">
+                    <h4 data-en="Bachelor of Arts in Chinese Language &amp; Literature"
+                        data-zh="汉语言文学学士">Bachelor of Arts in Chinese Language &amp; Literature</h4>
+                    <span data-en="Xi'an University of Architecture and Technology, China"
+                          data-zh="西安建筑科技大学，中国">Xi'an University of Architecture and Technology, China</span>
+        
+                </div>
+            </div>
+
+            <div class="download-area fade-in">
+               
+                <p style="margin-top: 20px; font-size: 0.8rem; color: #bbb;">
+                    Created by: Mira Yao
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 <strong>Mira</strong>. <span data-en="Created by Mira" data-zh="由 Mira 制作">Created by Mira</span></p>
+        </footer>
+
+        <button id="backToTopBtn" title="Go to top">↑</button>
+
+    </div>
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
